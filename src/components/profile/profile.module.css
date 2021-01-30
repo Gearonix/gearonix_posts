@@ -1,0 +1,32 @@
+.main{
+    width: 1466px;
+    margin-top: 30px;
+    border-radius: 20px;
+    min-height: 800px;
+    background: white;
+    border : 2px solid #585858;
+    margin: 0 auto;
+}
+.titleBlock{
+    height: 149px;
+    width: 100%;
+    background : #d3e0ea;
+    border-radius: 20px 20px 0 0px;
+}
+.title{
+    text-align: center;
+    color : #606060;
+    font-size: 70px;
+}
+.yourPosts{
+    color : #606060;
+    font-size: 50px;
+    margin: 0;
+    margin-left: 39px;
+}
+.postBlock{
+    background : #f6f5f5;
+    width: 100%;
+    border-radius: 25px;
+    margin: 0 auto;
+}

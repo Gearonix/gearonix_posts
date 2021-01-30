@@ -1,0 +1,191 @@
+
+.input,.loginButton,.registerButton{
+    border: none;
+    outline: none;
+    background: #EDEDED;
+    border-radius: 20px;
+    width: 95%;
+    height: 81px;
+    font-size: 30px;
+    color: #7E7E7E;
+    padding-left: 27px;
+}
+.inputTitle{
+    color: #4B4B4B;
+    font-size: 30px;
+    font-weight: normal;
+}
+.title{
+    text-align: center;
+    color: #525252;
+    font-size: 50px;
+    margin: 20px;
+    font-weight: normal;
+}
+.loginButton,.registerButton{
+    color: white;
+    background: #89B8FF;
+    /*margin: 0 auto;*/
+    display: block;
+    padding: 0;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    margin-top: 60px;
+
+}
+.input::placeholder{
+    color:rgba(192, 192, 192, 1);
+}
+.loginButton:hover{
+    background: rgba(72, 141, 243, 1);
+}
+.loginBlock{
+    margin: 0 auto;
+    width: 468px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translate(0,-50%);
+}
+.input{
+    background : #E8F0FE;
+    box-sizing: border-box;
+
+}
+.back{
+    margin-top: 21px;
+    margin-bottom: 21px;
+    color : #1954AC;
+    font-size: 30px;
+    text-decoration: none;
+    display: block;
+    margin-left: 15px;
+}
+.error{
+
+    font-size: 27px;
+    color : #DC1919;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+.registerButton{
+    background : #715B76;
+}
+.registerButton:hover{
+    background: rgba(201, 87, 227, 1);
+}
+.openMain{
+    animation: open 1s;
+}
+.closeMain{
+    animation: close 1s;
+}
+@keyframes open {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes close {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+@media (max-width: 1388px){
+    .input{
+        font-size: 25px;
+    }
+}
+@media (max-width: 1196px) {
+    .inputTitle{
+        font-size: 25px;
+    }
+    .loginBlock{
+        margin-top: 25px;
+        margin-bottom: 40px;
+    }
+    .input{
+        font-size: 20px;
+        height: 71px;
+    }
+    .title{
+        font-size: 50px;
+    }
+}
+@media (max-width: 950px) {
+    .loginBlock{
+        width: 50%;
+    }
+    .loginButton,.registerButton{
+        height: 60px;
+    }
+    .titleFirst{
+        margin-top: 90px;
+    }
+}
+/*@media (max-width: 766px) {*/
+/*    .input{*/
+/*        width: 363px;*/
+/*    }*/
+/*}*/
+@media (max-width: 600px) {
+    .input{
+        font-size: 17px;
+        /*height: 60px;*/
+
+    }
+    .title{
+        font-size: 40px;
+    }
+    /*.loginButton{*/
+    /*    width: 50%;*/
+    /*}*/
+}
+@media (max-width: 513px) {
+    .loginBlock{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 60%;
+    }
+    .titleFirst{
+        margin-top: 50px;
+    }
+    .loginButton,.registerButton{
+        height: 50px;
+        font-size: 27px;
+        /*width: 60%;*/
+    }
+    .input{
+        /*font-size: 14px;*/
+        height: 50px;
+    }
+    .inputTitle{
+        font-size: 20px;
+    }
+}
+@media (max-width: 454px) {
+    .loginBlock,.registerButton{
+        width: 270px;
+    }
+    .loginButton{
+        width: 240px;
+        margin: 0 auto;
+    }
+    .title{
+        /*font-size: 35px;*/
+    }
+    .titleFirst{
+        margin-top: 10px;
+    }
+    .back{
+        font-size: 20px;
+    }
+}

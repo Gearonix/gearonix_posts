@@ -1,0 +1,27 @@
+.main{
+    background : lightgrey;
+    height: 98vh;
+    overflow-y: auto;
+    border: 2px solid red;
+    position: relative;
+}
+.main::-webkit-scrollbar{
+    width: 0;
+}
+.card{
+    /*width: 600 ,height : 300,margin : '0 auto'}*/
+    width: 600px;
+    height: 300px;
+    margin: 0 auto;
+}
+.preloader{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.cancelButtonWrapper{
+    position: absolute;
+    top: 60px;
+    left: 100px;
+}

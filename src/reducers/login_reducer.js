@@ -31,7 +31,6 @@ export let loginTC = function(data){
             dispatch(error);
             return
         }
-        console.log(response.data.data)
         dispatch(loginAC(response.data.data))
 
     }
@@ -39,7 +38,7 @@ export let loginTC = function(data){
 export let getMyPostsTC = function(data){
     return async function(dispatch){
         let response = await API.getMyPosts(data);
-        console.log(response)
+        // debugger
         dispatch(setMyPostsAC(response.data.data))
 
     }

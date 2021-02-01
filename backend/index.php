@@ -17,6 +17,8 @@ $params = explode('/',$path);
 
 include 'functions.php';
 
+
+
 if ($method=='POST'){
 	switch ($params[1]) {
 		case 'getposts':
@@ -38,6 +40,23 @@ if ($method=='POST'){
 	    	$tmp_name = $_FILES['file']['tmp_name'];
 	    	// addImage($name,$tmp_name,$user_name);
 			addPost($name,$tmp_name,$data);
+			break;
+		case 'changepost':
+			header('Content-Type: form/multipart');
+	    	$data = json_decode($_POST['json'],true);
+	    	$name = 'POST_'.$data['data']['user_name'].$_FILES['file']['name'];
+	    	$tmp_name = $_FILES['file']['tmp_name'];
+			changePost($name,$tmp_name,$data);
+			break;
+		case 'addtagimage':
+			header('Content-Type: form/multipart');
+	    	$data = json_decode($_POST['json'],true);
+	    	$name = 'TAGS_'.$data['data']['user_name'].$_FILES['file']['name'];
+	    	$tmp_name = $_FILES['file']['tmp_name'];
+			addTagImage($name,$tmp_name,$data);
+			break;
+		case 'gettagbackground':
+			getTagBackground($data);
 			break;
 }
 }

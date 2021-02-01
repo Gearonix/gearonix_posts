@@ -73,13 +73,18 @@ function getPosts($data){
 	extract($data);
 	if ($tag==''){
 		$result = checkRequest("select * from posts order by id desc limit $page_count");
-		ok(['code' => 0,'status' => 200,'message' => 'ok','data' => read($result)]);
+		$TOTAL_COUNT = checkRequest("select count(*) from posts;")->fetch_assoc();
+
+		ok(['code' => 0,'status' => 200,'message' => 'ok','data' => read($result),'total_count' => 
+		$TOTAL_COUNT]);
 		exit();
 	}
 	// echo "select * from posts order by id desc limit $page_count where JSON_CONTAINS(tags,'\"$tag\"','$')";
 	// exit();
 	$result = checkRequest("select * from posts where JSON_CONTAINS(tags,'\"$tag\"','$') order by id desc limit $page_count");
-	ok(['code' => 0,'status' => 200,'message' => 'ok','data' => read($result)]);
+
+	ok(['code' => 0,'status' => 200,'message' => 'ok','data' => read($result),'total_count' => 
+		$TOTAL_COUNT]);
 }
 //if response->num_rows<=$page_count
 
@@ -98,7 +103,37 @@ function addPost($file_name,$tmp_name,$data){
 	move_uploaded_file($tmp_name,"backgrounds/$file_name");
 	extract($data);
 	$jstags = json_encode($tags);
-	checkRequest("insert posts(user,post_text,title,tags,post_image) values('$user_name','$description','$title','$jstags','$file_name');");
+	$jsimages = json_encode($images);
+	$jsvideos = json_encode($videos);
+	checkRequest("insert posts(user,post_text,title,tags,post_image,images,videos) values('$user_name','$description','$title','$jstags','$file_name','$jsimages','$jsvideos');");
 	ok();
+}
+function changePost($file_name,$tmp_name,$data){
+	extract($data['data']);
+	$id = $data['id'];
+	$jstags = json_encode($tags);
+	if ($file_name=='POST_admin'){
+		checkRequest("update posts set post_text = '$description', title = '$title',tags = '$jstags' where id = '$id';");
+		ok();
+		exit();
+
+	}
+	
+	move_uploaded_file($tmp_name,"backgrounds/$file_name");
+	$newTags = json_encode($tags);
+	checkRequest("update posts set post_text = '$description', title = '$title',tags = '$jstags',post_image = '$file_name' where id = '$id';");
+	ok();
+}
+function addTagImage($file_name,$tmp_name,$data){
+	$tag_name = $data['tag_name'];
+	move_uploaded_file($tmp_name,"tags_backgrounds/$file_name");
+	checkRequest("insert tags(name,image) values('$tag_name','$file_name')");
+	ok();
+
+}
+function getTagBackground($data){
+	$value = $data['value'];
+	$result = checkRequest("select image from tags where name='$value';");
+	ok(['code' => 0,'status' => 200,'message' => 'ok','data' => $result->fetch_assoc()]);
 }
 ?>

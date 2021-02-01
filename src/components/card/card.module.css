@@ -6,7 +6,8 @@
 .main{
     position: relative;
     width: 100%;
-    height: 800px;
+    height: 98vh;
+    background: #DDE7EF;
 }
 .main *{
     position : relative;
@@ -21,4 +22,12 @@
     height: 100%;
     z-index: 0;
     opacity: 0.9;
+}
+.description{
+    font-size: 26px;
+    color : #5E5E5E;
+}
+.user{
+    font-size: 30px;
+    color : black;
 }

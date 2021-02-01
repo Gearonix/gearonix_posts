@@ -9,7 +9,7 @@ import {Redirect} from 'react-router-dom';
 const LoginForm = function(props){
     const data = useSelector((state) => state.login);
     if (data.user_id){
-        return <Redirect to={'/profile'} />
+        return <Redirect to={'/'} />
     }
     return(
         <form onSubmit={props.handleSubmit}>

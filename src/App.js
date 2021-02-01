@@ -7,9 +7,7 @@ import 'antd/dist/antd.css';
 import './normalize.css';
 import Card from "./components/card/card";
 import Login from "./components/login/login";
-import Profile from "./components/profile/profile";
-import AddPost from "./components/addPost/addPost";
-import EditPost from "./components/editPost/editPost";
+import 'react-quill/dist/quill.snow.css';
 function App() {
   return (
     <div className="App">
@@ -18,9 +16,6 @@ function App() {
         <Route path={'/card/:id?'} component={Card} />
         <Route exact path={'/'} component={Main}/>
         <Route path={'/login'} component={Login} />
-        <Route path={'/profile'} component={Profile} />
-        <Route path={'/add_post'} component={AddPost} />
-        <Route path={'/edit_post/:id?'} component={EditPost} />
       </Switch>
     </div>
   );

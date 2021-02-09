@@ -2,9 +2,11 @@
 
 
 header('Content-type: application/json');
-header('Access-Control-Allow-Origin: http://localhost:3000');
+header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 header('Access-Control-Allow-Credentials: true');
+
+
 
 $path =  $_SERVER['REQUEST_URI'];
 
@@ -12,7 +14,9 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-$params = explode('/',$path);
+
+$params = explode('=',$path);
+
 
 
 include 'functions.php';

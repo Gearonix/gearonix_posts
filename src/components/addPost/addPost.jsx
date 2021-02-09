@@ -1,9 +1,8 @@
 import {Field, reduxForm} from "redux-form";
 import {useDispatch, useSelector} from "react-redux";
-import {NavLink, Redirect} from 'react-router-dom';
 import {addPostTC as addPost} from "../../reducers/main_reducer";
 import {useState, useRef} from "react";
-import {Button, Tag, Image} from 'antd';
+import {Button, Tag} from 'antd';
 import classes from './addPost.module.css';
 import {UploadOutlined} from '@ant-design/icons';
 import {useEffect} from "react";
@@ -21,7 +20,6 @@ const {EmojiBlot, ShortNameEmoji, ToolbarEmoji, TextAreaEmoji} = quillEmoji;
 const AddPost = function ({edit_data, edit_post, ...props}) {
     const dispatch = useDispatch();
     const user_name = useSelector((state) => state.login.user_name);
-    const [error, addError] = useState('');
     let [redirect, openRedirect] = useState(false);
     let [back, setBack] = useState(null);
     let [tags, addTags] = useState(edit_data?.tags ? JSON.parse(edit_data?.tags) : []);
@@ -42,7 +40,7 @@ const AddPost = function ({edit_data, edit_post, ...props}) {
         let func = edit_post ? () => dispatch(changePost(edit_data?.id, submit)) :
             () => dispatch(addPost(submit))
         let response = await func();
-        if (response?.data?.code == 0) {
+        if (response?.data?.code === 0) {
             openRedirect(true)
         }
     }
@@ -60,7 +58,7 @@ const AddPost = function ({edit_data, edit_post, ...props}) {
     }
 
     function closeTag(value) {
-        addTags(tags.filter((item) => item != value))
+        addTags(tags.filter((item) => item !== value))
     }
 
     function changeField(value) {
@@ -80,7 +78,7 @@ const AddPost = function ({edit_data, edit_post, ...props}) {
                          tags={tags} close={closeTag} edit_data={edit_data} edit_post={edit_post}
                          changeField={changeField} addImageFunc={addImageFunc} addVideoFunc={addVideoFunc}
                          videos={videos} images={images} main_class={main_class}
-                         close_form={() => openRedirect(true)} error={error}/>
+                         close_form={() => openRedirect(true)}/>
 }
 
 Quill.register({
@@ -101,7 +99,7 @@ const modulesQuill = {
         ],
         handlers: {
             'color': function (value) {
-                if (value == 'custom-color') value = window.prompt('Enter Hex Color Code');
+                if (value === 'custom-color') value = window.prompt('Enter Hex Color Code');
                 this.quill.format('color', value);
             }
         }
@@ -143,7 +141,7 @@ const AddPostForm = function (props) {
 
     function onChange() {
         let value = tags_ref.current.value;
-        if (value[value.length - 1] == ' ') {
+        if (value[value.length - 1] === ' ') {
             props.addTag(value.replace(' ', ''));
             tags_ref.current.value = ''
         }
@@ -216,7 +214,6 @@ const AddPostForm = function (props) {
                     </div>
                     {videoForm && <AddVideo addUrl={props.addVideoFunc} close={() => openVideoForm(false)}/>}
                     {showImageForm && <AddVideo addUrl={props.addImageFunc} close={() => openImageForm(false)}/>}</div>
-                <span>{props.error}</span>
                 <div className={classes.saveOrcancelBlock}>
                     <Button style={{
                         width: 339,

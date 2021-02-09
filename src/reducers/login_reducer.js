@@ -26,7 +26,7 @@ export let loginAC = function(data){
 export let loginTC = function(data){
     return async function(dispatch){
         let response = await API.login(data);
-        if (response.data.code!=0){
+        if (response.data.code!==0){
             let error = stopSubmit('login',{_error : response.data.message})
             dispatch(error);
             return

@@ -2,7 +2,7 @@ import {useLocation, NavLink} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {Card, Button, Skeleton, Empty, Tag, Image} from 'antd'
 import classes from './card.module.css';
-import {getOnePostTC as getOnePost, getTagBackgroundTC as getTagBackground} from "../../reducers/main_reducer";
+import {getOnePostTC as getOnePost} from "../../reducers/main_reducer";
 import {useEffect,useRef} from "react";
 import {MediaPlayer} from "../addPost/addPost";
 import {Telegram,VK} from 'react-social-sharing';
@@ -11,7 +11,6 @@ const MainCard = function(){
     const dispatch = useDispatch();
     const description = useRef()
     let card_id = location.pathname.split('/')[2];
-    const tag = useSelector((state) => state.main.tag);
     // selected_post
     function mount(){
             dispatch(getOnePost({id : card_id}))
@@ -34,12 +33,12 @@ const MainCard = function(){
     // tag_back
 
     let isSrc = data.post_image && src && src.default;
-    let tags = JSON.parse(data.tags).map((item) => <Tag>{item}</Tag>);
-    let images = JSON.parse(data?.images).map((item) => <Image
+    let tags = JSON.parse(data.tags).map((item,index) => <Tag key={index}>{item}</Tag>);
+    let images = JSON.parse(data?.images).map((item,index) => <Image key={index}
         width={350}
         src={item}
     />);
-    let videos = JSON.parse(data?.videos).map((item) => <MediaPlayer url={item} />)
+    let videos = JSON.parse(data?.videos).map((item,index) => <MediaPlayer key={index} url={item} />)
     function parseDescription(){
         if (description.current){
             description.current.innerHTML=data?.post_text
@@ -50,7 +49,7 @@ const MainCard = function(){
     return(
         <div className={classes.main}>
            <div className={classes.cancelButtonWrapper}>
-               <NavLink to={'/'}><Button dashed>Cancel</Button></NavLink></div>
+               <NavLink to={'/'}><Button dashed={'true'}>Cancel</Button></NavLink></div>
             {data?.error ?
 
                 <Empty style={{transform: 'scale(3) translate(-25%,0)',position: 'absolute',left : '50%',top : '50%'}} />
@@ -59,8 +58,11 @@ const MainCard = function(){
                     <p ref={description} className={classes.description}></p>
                     <p className={classes.user}>{data.user}</p>
                     {tags}
+                    <br />
                     {videos}
+                    <br />
                     {images}
+                    <br />
                     <Telegram link={location.pathname} />
                     <VK link={path} />
                 </Card>

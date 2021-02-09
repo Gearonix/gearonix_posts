@@ -65,7 +65,7 @@ export let setTagAC = function(value){
 export let getOnePostTC = function(data){
     return async function(dispatch){
         let response = await API.getOnePost(data);
-        if (response.data.status!=200){
+        if (response.data.status!==200){
             dispatch(setSelectedPostAC({error : true}))
             return
         }

@@ -3,6 +3,7 @@
     overflow-y: auto;
     position: relative;
     background: #DDE7EF;
+    height: 98vh;
 }
 .main *{
     z-index: 1;

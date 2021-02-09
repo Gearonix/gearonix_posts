@@ -3,17 +3,19 @@
 header('Content-type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
-header('Access-Control-Allow-Credentials: true');
+// header('Access-Control-Allow-Credentials: true');
 
-$host = 'localhost';
-$user = 'root';
-$password = 'A&ud9D?xf_jM';
-$database = 'posts';
+$host = 'spock.beget.ru';
+$user = 'veresko2_lenta';
+$password = 'F63vX*rdk';
+$database = 'veresko2_lenta';
 
-$mysqli = new mysqli($host,$user,$password,$database);
+
+$mysqli = new mysqli($host,$user,$password,$database,3307);
 
 if (!$mysqli){
 	$result = ['code' => 10,'status' => 500,'message' => 'Request Error'];
+	echo json_encode($result);
 	exit();
 }
 
@@ -68,13 +70,10 @@ function login($data){
 }
 
 function getPosts($data){
-	// SELECT * FROM posts ORDER BY id desc limit4;
-	// "select * from posts order by id desc limit $count";
 	extract($data);
 	if ($tag==''){
 		$result = checkRequest("select * from posts order by id desc limit $page_count");
 		$TOTAL_COUNT = checkRequest("select count(*) from posts;")->fetch_assoc();
-
 		ok(['code' => 0,'status' => 200,'message' => 'ok','data' => read($result),'total_count' => 
 		$TOTAL_COUNT]);
 		exit();

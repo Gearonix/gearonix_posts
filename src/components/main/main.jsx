@@ -6,9 +6,9 @@ import {
     getTagBackgroundTC as getTagBackground,
     setTagBackgroundAC as setTagBackground, addTagImageTC as addTagImage
 } from "../../reducers/main_reducer";
-import {Card, Skeleton, Spin, Tag, Button, Image} from 'antd';
+import {Card, Skeleton, Tag, Button, Image} from 'antd';
 import classes from './main.module.css'
-import {NavLink, useLocation} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {LoadingOutlined, PlusOutlined, FundOutlined, UploadOutlined} from '@ant-design/icons';
 import AddPost from "../addPost/addPost";
 import {Field, reduxForm} from "redux-form";
@@ -43,7 +43,7 @@ const Main = function () {
     useEffect(mount, [tag])
     let posts = useSelector((state) => state.main.posts);
     const page_count = useSelector((state) => state.main.page_count)
-    let elements = posts.map((item, index) => <PostItem user_name={item.user}
+    let elements = posts?.map((item, index) => <PostItem user_name={item.user}
                                                         title={item.title} background={item.post_image}
                                                         text={item.post_text} key={index} id={item.id}
                                                         tags={JSON.parse(item.tags)} setFilter={setFilter}
@@ -53,23 +53,18 @@ const Main = function () {
         dispatch(setTag(value))
     }
 
-    if (posts.length == 0) {
+    if (posts?.length === 0) {
         elements = [1, 1, 1].map((item, index) => <PreloaderCard key={index}/>)
     }
     const checkScroll = () => {
         dispatch(getPosts({page_count: page_count, tag: tag}))
     }
-    //todo : решить проблему с prealoder
-    const antIcon = <LoadingOutlined style={{
-        fontSize: 55, color: 'rgba(175, 175, 175, 1)', margin: '0 auto', textAlign: 'center'
-    }} spin/>;
 
     function tagClose() {
         setFilter('');
         dispatch(setTagBackground(null));
     }
 
-    console.log(isAddPost)
 
     function addPostClose() {
         openAddPost(false)
@@ -111,8 +106,7 @@ export const PostItem = function (props) {
     }
 
     useEffect(mount, [])
-    console.log(JSON.parse(props.images))
-    let images = JSON.parse(props.images).map((item) => <Image src={item} width={200}/>)
+    let images = JSON.parse(props.images).map((item,index) => <Image src={item} width={200} key={index}/>)
     return (
         <div>
             <Card title={props.title} extra={<NavLink to={`/card/${props.id}`}>Show more</NavLink>}
@@ -120,7 +114,7 @@ export const PostItem = function (props) {
                       width: 800, maxHeight: 700, margin: '0 auto',
                       marginTop: 40
                   }}>
-                <p ref={descRef} class={classes.desc}></p>
+                <p ref={descRef} className={classes.desc}></p>
                 <div className={classes.imagesBlock}>
                     {images}
                 </div>

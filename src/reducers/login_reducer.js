@@ -35,6 +35,16 @@ export let loginTC = function(data){
 
     }
 }
+export let registerTC = (data) => async (dispatch) => {
+    const response = await API.register(data);
+    if (response.data.code!=0){
+        let error = stopSubmit('login',{_error : response.data.message})
+        dispatch(error);
+        return
+    }
+    debugger
+    dispatch(loginAC(response.data.data))
+}
 export let getMyPostsTC = function(data){
     return async function(dispatch){
         let response = await API.getMyPosts(data);

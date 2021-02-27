@@ -15,7 +15,8 @@ function App() {
       <Switch>
         <Route path={'/card/:id?'} component={Card} />
         <Route exact path={'/'} component={Main}/>
-        <Route path={'/login'} component={Login} />
+        <Route path={'/login'} render={ () => <Login mode={'login'} />} />
+        <Route path={'/register'} render={ () => <Login mode={'register'} />} />
       </Switch>
     </div>
   );

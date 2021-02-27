@@ -30,7 +30,7 @@
     padding: 0;
     transition-property: background-color;
     transition-duration: 0.5s;
-    margin-top: 60px;
+    /*margin-top: 60px;*/
 
 }
 .input::placeholder{

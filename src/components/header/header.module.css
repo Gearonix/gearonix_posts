@@ -3,13 +3,18 @@
     height: 80px;
     background : rgba(79, 87, 108, 1);
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
-.login{
+.login,.logo{
     font-size: 35px;
     cursor: pointer;
     margin-left: 80px;
     color : rgba(216, 216, 216, 1)
+}
+.login{
+    font-size: 30px;
+    margin-right: 25px;
 }
 .login:hover{
     color : white;

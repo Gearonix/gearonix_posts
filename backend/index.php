@@ -15,7 +15,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 $data = json_decode(file_get_contents('php://input'), true);
 
 
-$params = explode('=',$path);
+$params = explode('/',$path);
 
 
 
@@ -61,6 +61,9 @@ if ($method=='POST'){
 			break;
 		case 'gettagbackground':
 			getTagBackground($data);
+			break;
+		case 'register':
+			register($data);
 			break;
 }
 }

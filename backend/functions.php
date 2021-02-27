@@ -1,17 +1,17 @@
 
 <?php
 header('Content-type: application/json');
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Headers: *');
 // header('Access-Control-Allow-Credentials: true');
 
-$host = 'spock.beget.ru';
-$user = 'veresko2_lenta';
-$password = 'F63vX*rdk';
-$database = 'veresko2_lenta';
+$host = 'localhost';
+$user = 'root';
+$password = 'password';
+$database = 'posts';
 
 
-$mysqli = new mysqli($host,$user,$password,$database,3307);
+$mysqli = new mysqli($host,$user,$password,$database);
 
 if (!$mysqli){
 	$result = ['code' => 10,'status' => 500,'message' => 'Request Error'];
@@ -53,10 +53,11 @@ function read($result){
 
 function register($data){
 	extract($data);
-	$result = checkRequest("select user_name from users where user_name='$name';");
+	$result = checkRequest("select * from users where user='$user_name';");
 	throwError($result->num_rows>0,['code' => 15,'message' => 'This name already exists']);
-	$result = checkRequest("insert users(user_name,password) values('$name','$password')");
-	ok();
+	checkRequest("insert users(user,password) values('$user_name','$password')");
+	$result = checkRequest("select * from users where user='$user_name';");
+	ok(['code' => 0,'status' => 200,'message' => 'ok','data' => $result->fetch_assoc()]);
 }
 
 function login($data){
